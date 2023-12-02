@@ -12,7 +12,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn part_one(lines: &Lines) -> Result<()> {
+fn part_one(lines: &Lines) -> Result<u32> {
     let mut sum: u32 = 0;
 
     for line in lines {
@@ -23,7 +23,7 @@ fn part_one(lines: &Lines) -> Result<()> {
     }
 
     println!("part one: {}", sum);
-    Ok(())
+    Ok(sum)
 }
 
 fn first_digit<I>(mut chars: I) -> Result<char>
@@ -35,7 +35,7 @@ where
         .ok_or_else(|| anyhow!("no digit found"))
 }
 
-fn part_two(lines: &Lines) -> Result<()> {
+fn part_two(lines: &Lines) -> Result<u32> {
     let mut sum: u32 = 0;
 
     for line in lines {
@@ -46,7 +46,7 @@ fn part_two(lines: &Lines) -> Result<()> {
     }
 
     println!("part two: {}", sum);
-    Ok(())
+    Ok(sum)
 }
 
 const DIGIT_WORDS: [([&str; 2], u32); 10] = [
@@ -82,4 +82,23 @@ where
     }
 
     Err(anyhow!("no digit found"))
+}
+
+#[cfg(test)]
+mod day1_tests {
+    use super::*;
+
+    #[test]
+    fn part_1() {
+        let lines = day_one_lines().unwrap();
+        let result = part_one(&lines).unwrap();
+        assert_eq!(result, 54667);
+    }
+
+    #[test]
+    fn part_2() {
+        let lines = day_one_lines().unwrap();
+        let result = part_two(&lines).unwrap();
+        assert_eq!(result, 54203);
+    }
 }
