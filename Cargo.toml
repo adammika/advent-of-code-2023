@@ -3,6 +3,9 @@ members = [
   "inputs",
   "solutions/*",
 ]
+default-members = [
+  "solutions/*",
+]
 resolver = "2"
 
 [workspace.dependencies]

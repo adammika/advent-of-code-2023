@@ -9,12 +9,15 @@ pub fn day_one_lines() -> Result<Lines> {
     read_lines("day-1.txt")
 }
 
+pub fn day_two_lines() -> Result<Lines> {
+    read_lines("day-2.txt")
+}
+
 fn read_lines<P>(filename: P) -> Result<Lines>
 where
     P: AsRef<Path>,
 {
     let dir = env!("CARGO_MANIFEST_DIR");
-    println!("dir: {}", dir);
     let path = Path::new(dir);
     let file_path = path.join(filename);
 
