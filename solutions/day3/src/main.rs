@@ -18,18 +18,7 @@ fn part_one(lines: &Lines) -> Result<u32> {
     let sum = schematic
         .numbers
         .iter()
-        .filter(|n| {
-            let x_range_start = if n.start_x > 0 { n.start_x - 1 } else { 0 };
-            let target_x_range = x_range_start..=(n.end_x + 1);
-
-            let y_range_start = if n.y > 0 { n.y - 1 } else { 0 };
-            let target_y_range = y_range_start..=(n.y + 1);
-
-            schematic
-                .symbols
-                .iter()
-                .any(|s| target_x_range.contains(&s.x) && target_y_range.contains(&s.y))
-        })
+        .filter(|n| n.has_adjacent_symbol(&schematic))
         .map(|n| n.value)
         .sum();
 
@@ -43,29 +32,7 @@ fn part_two(lines: &Lines) -> Result<u32> {
         .symbols
         .iter()
         .filter(|s| s.kind == '*')
-        .map(|s| {
-            let x_range_start = if s.x > 0 { s.x - 1 } else { 0 };
-            let target_x_range = x_range_start..=(s.x + 1);
-
-            let y_range_start = if s.y > 0 { s.y - 1 } else { 0 };
-            let target_y_range = y_range_start..=(s.y + 1);
-
-            let adjacent_numbers: Vec<u32> = schematic
-                .numbers
-                .iter()
-                .filter(|n| {
-                    (target_x_range.contains(&n.start_x) || target_x_range.contains(&n.end_x))
-                        && target_y_range.contains(&n.y)
-                })
-                .map(|n| n.value)
-                .collect();
-
-            return if adjacent_numbers.len() == 2 {
-                adjacent_numbers.iter().product()
-            } else {
-                0
-            };
-        })
+        .map(|s| s.gear_ratio(&schematic))
         .sum();
 
     Ok(sum)
@@ -122,6 +89,51 @@ impl Schematic {
         }
 
         Ok(Self { numbers, symbols })
+    }
+}
+
+impl Number {
+    fn has_adjacent_symbol(&self, schematic: &Schematic) -> bool {
+        let x_range_start = if self.start_x > 0 {
+            self.start_x - 1
+        } else {
+            0
+        };
+        let target_x_range = x_range_start..=(self.end_x + 1);
+
+        let y_range_start = if self.y > 0 { self.y - 1 } else { 0 };
+        let target_y_range = y_range_start..=(self.y + 1);
+
+        schematic
+            .symbols
+            .iter()
+            .any(|s| target_x_range.contains(&s.x) && target_y_range.contains(&s.y))
+    }
+}
+
+impl Symbol {
+    fn gear_ratio(&self, schematic: &Schematic) -> u32 {
+        let x_range_start = if self.x > 0 { self.x - 1 } else { 0 };
+        let target_x_range = x_range_start..=(self.x + 1);
+
+        let y_range_start = if self.y > 0 { self.y - 1 } else { 0 };
+        let target_y_range = y_range_start..=(self.y + 1);
+
+        let adjacent_numbers: Vec<u32> = schematic
+            .numbers
+            .iter()
+            .filter(|n| {
+                (target_x_range.contains(&n.start_x) || target_x_range.contains(&n.end_x))
+                    && target_y_range.contains(&n.y)
+            })
+            .map(|n| n.value)
+            .collect();
+
+        return if adjacent_numbers.len() == 2 {
+            adjacent_numbers.iter().product()
+        } else {
+            0
+        };
     }
 }
 
