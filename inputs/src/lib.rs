@@ -13,6 +13,10 @@ pub fn day_two_lines() -> Result<Lines> {
     read_lines("day-2.txt")
 }
 
+pub fn day_three_lines() -> Result<Lines> {
+    read_lines("day-3.txt")
+}
+
 fn read_lines<P>(filename: P) -> Result<Lines>
 where
     P: AsRef<Path>,
