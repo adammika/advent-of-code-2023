@@ -1,10 +1,10 @@
 use anyhow::{anyhow, Result};
-use inputs::{day_two_lines, Lines};
+use inputs::{read_lines, Lines};
 use std::cmp;
 use std::str::FromStr;
 
 fn main() -> Result<()> {
-    let lines = day_two_lines()?;
+    let lines = read_lines("day2.txt")?;
 
     println!("Day Two");
     println!("-------");
@@ -129,14 +129,14 @@ mod day2_tests {
 
     #[test]
     fn part_1() {
-        let lines = day_two_lines().unwrap();
+        let lines = read_lines("day2.txt").unwrap();
         let sum = part_one(&lines).unwrap();
         assert_eq!(sum, 2810);
     }
 
     #[test]
     fn part_2() {
-        let lines = day_two_lines().unwrap();
+        let lines = read_lines("day2.txt").unwrap();
         let sum = part_two(&lines).unwrap();
         assert_eq!(sum, 69110);
     }

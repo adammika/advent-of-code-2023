@@ -1,8 +1,8 @@
 use anyhow::{anyhow, Result};
-use inputs::{day_one_lines, Lines};
+use inputs::{read_lines, Lines};
 
 fn main() -> Result<()> {
-    let lines = day_one_lines()?;
+    let lines = read_lines("day1.txt")?;
 
     println!("Day One");
     println!("-------");
@@ -90,14 +90,14 @@ mod day1_tests {
 
     #[test]
     fn part_1() {
-        let lines = day_one_lines().unwrap();
+        let lines = read_lines("day1.txt").unwrap();
         let result = part_one(&lines).unwrap();
         assert_eq!(result, 54667);
     }
 
     #[test]
     fn part_2() {
-        let lines = day_one_lines().unwrap();
+        let lines = read_lines("day1.txt").unwrap();
         let result = part_two(&lines).unwrap();
         assert_eq!(result, 54203);
     }

@@ -1,9 +1,8 @@
 use anyhow::Result;
-use inputs::{day_three_lines, Lines};
-use std::str::FromStr;
+use inputs::{read_lines, Lines};
 
 fn main() -> Result<()> {
-    let lines = day_three_lines()?;
+    let lines = read_lines("day3.txt")?;
 
     println!("Day Three");
     println!("-------");
@@ -132,14 +131,14 @@ mod day3_tests {
 
     #[test]
     fn part_1() {
-        let lines = day_three_lines().unwrap();
+        let lines = read_lines("day3.txt").unwrap();
         let sum = part_one(&lines).unwrap();
         assert_eq!(sum, 550064);
     }
 
     #[test]
     fn part_2() {
-        let lines = day_three_lines().unwrap();
+        let lines = read_lines("day3.txt").unwrap();
         let sum = part_two(&lines).unwrap();
         assert_eq!(sum, 85010461);
     }
