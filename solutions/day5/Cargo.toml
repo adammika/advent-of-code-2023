@@ -1,8 +1,9 @@
 [package]
-name = "day4"
+name = "day5"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 anyhow = { workspace = true }
 inputs = { path = "../../inputs" }
+regex = "1.10.2"
