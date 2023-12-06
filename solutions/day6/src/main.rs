@@ -32,7 +32,7 @@ fn part_one(lines: &Lines) -> Result<usize> {
 }
 
 fn part_two(lines: &Lines) -> Result<usize> {
-    let (time, target_distance) = parse_races_bad_kerning(lines);
+    let (time, target_distance) = parse_race_bad_kerning(lines);
 
     let mut num_ways_to_win_this_race = 0;
     for hold_time in 1..=time {
@@ -60,7 +60,7 @@ fn parse_races(lines: &Lines) -> Vec<(usize, usize)> {
     times.into_iter().zip(distances.into_iter()).collect()
 }
 
-fn parse_races_bad_kerning(lines: &Lines) -> (usize, usize) {
+fn parse_race_bad_kerning(lines: &Lines) -> (usize, usize) {
     let time: usize = lines[0]
         .trim_start_matches("Time:")
         .split_whitespace()
@@ -76,7 +76,6 @@ fn parse_races_bad_kerning(lines: &Lines) -> (usize, usize) {
         .unwrap();
 
     (time, distance)
-    // times.into_iter().zip(distances.into_iter()).collect()
 }
 
 #[cfg(test)]
