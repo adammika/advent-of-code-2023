@@ -166,6 +166,4 @@ mod day5_tests {
         let sum = part_two(&lines).unwrap();
         assert_eq!(sum, 20283860);
     }
-
-    // too high 26788781
 }
